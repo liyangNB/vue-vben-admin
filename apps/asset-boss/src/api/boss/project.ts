@@ -65,6 +65,7 @@ export async function apiProjectBatchDeletePermanent(
 /**
  * 查询项目详情
  * @param params
+ * @param params.id 项目id
  * @returns ProjectDetailsVO
  */
 export async function apiProjectDetails(params: { id: string }) {
