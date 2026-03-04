@@ -1,0 +1,36 @@
+{
+  "assetClass": {
+    "menuName": "Asset Class"
+  },
+  "asset": {
+    "menuName": "Asset",
+    "analytics": "Analytics",
+    "workspace": "Workspace",
+    "name": "Name",
+    "code": "Code",
+    "type": "Type",
+    "state": "State",
+    "owner": "Owner",
+    "classId": "Class",
+    "projectId": "Project",
+    "total": "Total",
+    "address": "Address",
+    "imgUrl": "Image",
+    "remark": "Remark",
+    "typeAsset": "Asset",
+    "typeConsumable": "Consumable",
+    "stateUnuse": "Unused",
+    "stateUse": "In Use",
+    "stateScrap": "Scrapped",
+    "stateRework": "Rework"
+  },
+  "class": {
+    "name": "Name",
+    "code": "Code",
+    "parentId": "Parent ID",
+    "parentName": "Parent Class",
+    "addChild": "Add Child",
+    "remark": "Remark",
+    "deleteWarning": "Deleting this class will also delete all assets under it. Please proceed with caution!"
+  }
+}

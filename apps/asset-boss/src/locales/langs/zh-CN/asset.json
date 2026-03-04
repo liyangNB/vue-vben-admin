@@ -1,0 +1,38 @@
+{
+  "title": "资产管理",
+  "assetClass": {
+    "menuName": "资产分类"
+  },
+  "asset": {
+    "menuName": "资产列表",
+    "analytics": "分析页",
+    "workspace": "工作台",
+    "name": "名称",
+    "code": "编号",
+    "type": "类型",
+    "state": "设备状态",
+    "owner": "所属人",
+    "classId": "分类",
+    "projectId": "项目",
+    "total": "库存总量",
+    "address": "位置信息",
+    "imgUrl": "图片",
+    "remark": "备注",
+    "typeAsset": "资产",
+    "typeConsumable": "耗材",
+    "stateUnuse": "未使用",
+    "stateUse": "使用中",
+    "stateScrap": "报废",
+    "stateRework": "返工"
+  },
+  "class": {
+    "button": "新增资产分类",
+    "name": "名称",
+    "code": "编号",
+    "parentId": "父分类ID",
+    "parentName": "父分类",
+    "addChild": "新增下级",
+    "remark": "备注",
+    "deleteWarning": "删除该分类后，该分类下的所有资产也会同步删除，请慎重操作！"
+  }
+}

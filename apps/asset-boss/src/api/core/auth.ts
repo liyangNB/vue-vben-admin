@@ -1,3 +1,7 @@
+import type { AxiosResponse, HttpResponse } from '@vben/request';
+
+import type { LoginAo, LoginUserInfoVo } from '../types';
+
 import { baseRequestClient, requestClient } from '#/api/request';
 
 export namespace AuthApi {
@@ -21,31 +25,18 @@ export namespace AuthApi {
 /**
  * 登录
  */
-export async function loginApi(data: AuthApi.LoginParams) {
-  return requestClient.post<AuthApi.LoginResult>('/auth/login', data);
-}
-
-/**
- * 刷新accessToken
- */
-export async function refreshTokenApi() {
-  return baseRequestClient.post<AuthApi.RefreshTokenResult>('/auth/refresh', {
-    withCredentials: true,
-  });
+export async function apiLogin(data: LoginAo) {
+  return baseRequestClient.post<AxiosResponse<HttpResponse<LoginUserInfoVo>>>(
+    '/v1/account/login',
+    data,
+  );
 }
 
 /**
  * 退出登录
  */
-export async function logoutApi() {
-  return baseRequestClient.post('/auth/logout', {
+export async function apiLogout() {
+  return requestClient.post('/v1/account/logout', {
     withCredentials: true,
   });
-}
-
-/**
- * 获取用户权限码
- */
-export async function getAccessCodesApi() {
-  return requestClient.get<string[]>('/auth/codes');
 }

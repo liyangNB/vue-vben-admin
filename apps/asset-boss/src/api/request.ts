@@ -5,19 +5,10 @@ import type { RequestClientOptions } from '@vben/request';
 
 import { useAppConfig } from '@vben/hooks';
 import { preferences } from '@vben/preferences';
-import {
-  authenticateResponseInterceptor,
-  defaultResponseInterceptor,
-  errorMessageResponseInterceptor,
-  RequestClient,
-} from '@vben/request';
+import { errorMessageResponseInterceptor, RequestClient } from '@vben/request';
 import { useAccessStore } from '@vben/stores';
 
-import { message } from 'ant-design-vue';
-
-import { useAuthStore } from '#/store';
-
-import { refreshTokenApi } from './core';
+import { apiStatusCodeHandler } from './errorStatusCodeHandler';
 
 const { apiURL } = useAppConfig(import.meta.env, import.meta.env.PROD);
 
@@ -25,39 +16,11 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
   const client = new RequestClient({
     ...options,
     baseURL,
+    withCredentials: true,
   });
 
-  /**
-   * 重新认证逻辑
-   */
-  async function doReAuthenticate() {
-    console.warn('Access token or refresh token is invalid or expired. ');
-    const accessStore = useAccessStore();
-    const authStore = useAuthStore();
-    accessStore.setAccessToken(null);
-    if (
-      preferences.app.loginExpiredMode === 'modal' &&
-      accessStore.isAccessChecked
-    ) {
-      accessStore.setLoginExpired(true);
-    } else {
-      await authStore.logout();
-    }
-  }
-
-  /**
-   * 刷新token逻辑
-   */
-  async function doRefreshToken() {
-    const accessStore = useAccessStore();
-    const resp = await refreshTokenApi();
-    const newToken = resp.data;
-    accessStore.setAccessToken(newToken);
-    return newToken;
-  }
-
   function formatToken(token: null | string) {
-    return token ? `Bearer ${token}` : null;
+    return token ? `${token}` : null;
   }
 
   // 请求头处理
@@ -65,7 +28,7 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
     fulfilled: async (config) => {
       const accessStore = useAccessStore();
 
-      config.headers.Authorization = formatToken(accessStore.accessToken);
+      config.headers['Auth-Token'] = formatToken(accessStore.accessToken);
       config.headers['Accept-Language'] = preferences.app.locale;
       return config;
     },
@@ -73,33 +36,59 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
 
   // 处理返回的响应数据格式
   client.addResponseInterceptor(
-    defaultResponseInterceptor({
-      codeField: 'code',
-      dataField: 'data',
-      successCode: 0,
-    }),
+    // defaultResponseInterceptor({
+    //   codeField: 'code',
+    //   dataField: 'data',
+    //   successCode: 0,
+    // }),
+    {
+      fulfilled: (response) => {
+        const { data: responseData, status } = response;
+        if (status >= 200 && status < 400) {
+          const { code, data } = responseData;
+
+          if (!code) {
+            const resType = Object.prototype.toString.call(responseData);
+            const isBlob = resType === '[object Blob]';
+            const isString = resType === '[object String]';
+            if (isBlob || isString) {
+              return responseData;
+            }
+          }
+
+          if (code === 0) {
+            return data;
+          }
+
+          if (code === 201_006) {
+            return data;
+          }
+        }
+
+        throw Object.assign({}, response, { response });
+      },
+    },
   );
 
   // token过期的处理
-  client.addResponseInterceptor(
-    authenticateResponseInterceptor({
-      client,
-      doReAuthenticate,
-      doRefreshToken,
-      enableRefreshToken: preferences.app.enableRefreshToken,
-      formatToken,
-    }),
-  );
+  // client.addResponseInterceptor(
+  //   authenticateResponseInterceptor({
+  //     client,
+  //     doReAuthenticate,
+  //     doRefreshToken,
+  //     enableRefreshToken: preferences.app.enableRefreshToken,
+  //     formatToken,
+  //   }),
+  // );
 
   // 通用的错误处理,如果没有进入上面的错误处理逻辑，就会进入这里
   client.addResponseInterceptor(
     errorMessageResponseInterceptor((msg: string, error) => {
+      console.error(msg, error);
       // 这里可以根据业务进行定制,你可以拿到 error 内的信息进行定制化处理，根据不同的 code 做不同的提示，而不是直接使用 message.error 提示 msg
       // 当前mock接口返回的错误字段是 error 或者 message
       const responseData = error?.response?.data ?? {};
-      const errorMessage = responseData?.error ?? responseData?.message ?? '';
-      // 如果没有错误信息，则会根据状态码进行提示
-      message.error(errorMessage || msg);
+      apiStatusCodeHandler(responseData);
     }),
   );
 

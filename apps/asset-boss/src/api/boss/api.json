@@ -1,0 +1,5116 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "莫图云平台",
+        "version": "1.0-SNAPSHOT",
+        "title": "资产管理系统-运维平台后管理接口-dev环境",
+        "contact": {
+            "name": "asset-boss",
+            "url": "static/更多说明.html",
+            "email": "cloud@motutec.com"
+        }
+    },
+    "host": "10.10.0.10:12026",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "权限模块",
+            "description": "Permission Controller"
+        },
+        {
+            "name": "审批模版",
+            "description": "Oa Apply Template Controller"
+        },
+        {
+            "name": "项目模块",
+            "description": "Project Controller"
+        },
+        {
+            "name": "资产模块",
+            "description": "Asset Controller"
+        },
+        {
+            "name": "资产分类",
+            "description": "Asset Class Controller"
+        },
+        {
+            "name": "示例模块",
+            "description": "Demo Controller"
+        },
+        {
+            "name": "账号模块",
+            "description": "Account Controller"
+        }
+    ],
+    "paths": {
+        "/v1/account/login": {
+            "post": {
+                "tags": [
+                    "账号模块"
+                ],
+                "summary": "登录",
+                "description": "登录账号",
+                "operationId": "loginUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "loginAo",
+                        "description": "loginAo",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LoginAo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/LoginUserInfoVo"
+                        }
+                    },
+                    "101001": {
+                        "description": "用户不存在"
+                    },
+                    "101002": {
+                        "description": "密码错误"
+                    },
+                    "101003": {
+                        "description": "账户状态异常"
+                    },
+                    "104001": {
+                        "description": "机构不存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfLoginUserInfoVo"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/account/logout": {
+            "post": {
+                "tags": [
+                    "账号模块"
+                ],
+                "summary": "退出登录",
+                "description": "退出登录",
+                "operationId": "logoutUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/asset/add": {
+            "post": {
+                "tags": [
+                    "资产模块"
+                ],
+                "summary": "添加资产",
+                "description": "添加资产",
+                "operationId": "addUsingPOST_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AssetAddAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "100300": {
+                        "description": "资产编号已存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/asset/batch/delete": {
+            "post": {
+                "tags": [
+                    "资产模块"
+                ],
+                "summary": "批量删除资产",
+                "description": "批量删除资产",
+                "operationId": "deleteUsingPOST_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AssetDeleteAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/asset/batch/delete/permanent": {
+            "post": {
+                "tags": [
+                    "资产模块"
+                ],
+                "summary": "批量物理删除资产",
+                "description": "批量物理删除资产",
+                "operationId": "permanentDeleteUsingPOST_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AssetPermanentDeleteAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/asset/class/add": {
+            "post": {
+                "tags": [
+                    "资产分类"
+                ],
+                "summary": "添加资产分类",
+                "description": "添加资产分类",
+                "operationId": "addUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AssetClassAddAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "100200": {
+                        "description": "资产分类编号已存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/asset/class/batch/delete": {
+            "post": {
+                "tags": [
+                    "资产分类"
+                ],
+                "summary": "批量删除资产分类",
+                "description": "批量删除资产分类",
+                "operationId": "deleteUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AssetClassDeleteAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/asset/class/batch/delete/permanent": {
+            "post": {
+                "tags": [
+                    "资产分类"
+                ],
+                "summary": "批量物理删除资产分类",
+                "description": "批量物理删除资产分类",
+                "operationId": "permanentDeleteUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AssetClassPermanentDeleteAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/asset/class/details": {
+            "get": {
+                "tags": [
+                    "资产分类"
+                ],
+                "summary": "查询资产分类详情",
+                "description": "查询资产分类详情",
+                "operationId": "detailsUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "资产分类id",
+                        "required": true,
+                        "type": "ref"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/AssetClassDetailsVO"
+                        }
+                    },
+                    "100201": {
+                        "description": "资产分类不存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfAssetClassDetailsVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/asset/class/page": {
+            "get": {
+                "tags": [
+                    "资产分类"
+                ],
+                "summary": "查询资产分类分页列表",
+                "description": "查询资产分类分页列表，支持分页",
+                "operationId": "pageUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "description": "当前页数",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "页大小",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "description": "编号",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "名称",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parentId",
+                        "in": "query",
+                        "description": "父分类ID",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/AssetClassPageVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfIPageOfAssetClassPageVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/asset/class/update": {
+            "post": {
+                "tags": [
+                    "资产分类"
+                ],
+                "summary": "更新资产分类",
+                "description": "更新资产分类",
+                "operationId": "updateUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AssetClassUpdateAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "100200": {
+                        "description": "资产分类编号已存在"
+                    },
+                    "100201": {
+                        "description": "资产分类不存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/asset/details": {
+            "get": {
+                "tags": [
+                    "资产模块"
+                ],
+                "summary": "查询资产详情",
+                "description": "查询资产详情",
+                "operationId": "detailsUsingGET_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "资产id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/AssetDetailsVO"
+                        }
+                    },
+                    "100301": {
+                        "description": "资产不存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfAssetDetailsVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/asset/page": {
+            "get": {
+                "tags": [
+                    "资产模块"
+                ],
+                "summary": "查询资产分页列表",
+                "description": "查询资产分页列表，支持分页",
+                "operationId": "pageUsingGET_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "description": "当前页数",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "页大小",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "description": "编号",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "名称",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "类型",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "设备状态",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "owner",
+                        "in": "query",
+                        "description": "所属人",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "classId",
+                        "in": "query",
+                        "description": "分类ID",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "projectId",
+                        "in": "query",
+                        "description": "项目ID",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/AssetPageVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfIPageOfAssetPageVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/asset/update": {
+            "post": {
+                "tags": [
+                    "资产模块"
+                ],
+                "summary": "更新资产",
+                "description": "更新资产",
+                "operationId": "updateUsingPOST_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AssetUpdateAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "100300": {
+                        "description": "资产编号已存在"
+                    },
+                    "100301": {
+                        "description": "资产不存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/demo/add": {
+            "post": {
+                "tags": [
+                    "示例模块"
+                ],
+                "summary": "添加示例",
+                "description": "添加示例",
+                "operationId": "addUsingPOST_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DemoAddAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "100000": {
+                        "description": "示例已存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/demo/batch/delete": {
+            "post": {
+                "tags": [
+                    "示例模块"
+                ],
+                "summary": "批量删除示例",
+                "description": "批量删除示例",
+                "operationId": "deleteUsingPOST_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DemoDeleteAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/demo/batch/delete/permanent": {
+            "post": {
+                "tags": [
+                    "示例模块"
+                ],
+                "summary": "批量物理删除示例",
+                "description": "批量物理删除示例",
+                "operationId": "permanentDeleteUsingPOST_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DemoPermanentDeleteAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/demo/count/info": {
+            "get": {
+                "tags": [
+                    "示例模块"
+                ],
+                "summary": "示例用户排名",
+                "description": "示例用户排名",
+                "operationId": "countInfoUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "description": "当前页数",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "页大小",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "邮箱",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/DemoDetailsVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfIPageOfCountInfoVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/demo/details": {
+            "get": {
+                "tags": [
+                    "示例模块"
+                ],
+                "summary": "查询示例详情",
+                "description": "查询示例",
+                "operationId": "detailsUsingGET_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "示例id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/DemoDetailsVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfDemoDetailsVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/demo/page": {
+            "get": {
+                "tags": [
+                    "示例模块"
+                ],
+                "summary": "查询示例分页列表",
+                "description": "查询示例列表，支持分页",
+                "operationId": "pageUsingGET_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "description": "当前页数",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "页大小",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "description": "编码，全局唯一（如商品码、订单号前缀等）",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "邮箱",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "startTime",
+                        "in": "query",
+                        "description": "开始时间（日期+时间）",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "状态 [0：草稿、1：正常/启用、2：禁用、3：已过期]",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/DemoPageVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfIPageOfDemoPageVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/demo/update": {
+            "post": {
+                "tags": [
+                    "示例模块"
+                ],
+                "summary": "更新示例",
+                "description": "更新示例",
+                "operationId": "updateUsingPOST_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DemoUpdateAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "100001": {
+                        "description": "示例不存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/oa/apply/template/add": {
+            "post": {
+                "tags": [
+                    "审批模版"
+                ],
+                "summary": "添加OA申请模版",
+                "description": "添加OA申请模版",
+                "operationId": "addUsingPOST_3",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OaApplyTemplateAddAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "100400": {
+                        "description": "OA申请模版编号已存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/oa/apply/template/batch/delete": {
+            "post": {
+                "tags": [
+                    "审批模版"
+                ],
+                "summary": "批量删除OA申请模版",
+                "description": "批量删除OA申请模版",
+                "operationId": "deleteUsingPOST_3",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OaApplyTemplateDeleteAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/oa/apply/template/batch/delete/permanent": {
+            "post": {
+                "tags": [
+                    "审批模版"
+                ],
+                "summary": "批量物理删除OA申请模版",
+                "description": "批量物理删除OA申请模版",
+                "operationId": "permanentDeleteUsingPOST_3",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OaApplyTemplatePermanentDeleteAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/oa/apply/template/details": {
+            "get": {
+                "tags": [
+                    "审批模版"
+                ],
+                "summary": "查询OA申请模版详情",
+                "description": "查询OA申请模版详情",
+                "operationId": "detailsUsingGET_3",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "OA申请模版id",
+                        "required": true,
+                        "type": "ref"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/OaApplyTemplateDetailsVO"
+                        }
+                    },
+                    "100401": {
+                        "description": "OA申请模版不存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfOaApplyTemplateDetailsVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/oa/apply/template/page": {
+            "get": {
+                "tags": [
+                    "审批模版"
+                ],
+                "summary": "查询OA申请模版分页列表",
+                "description": "查询OA申请模版分页列表，支持分页",
+                "operationId": "pageUsingGET_3",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "description": "当前页数",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "页大小",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "description": "编号",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "名称",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "网络路径",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "path",
+                        "in": "query",
+                        "description": "本地路径",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/OaApplyTemplatePageVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfIPageOfOaApplyTemplatePageVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/oa/apply/template/update": {
+            "post": {
+                "tags": [
+                    "审批模版"
+                ],
+                "summary": "更新OA申请模版",
+                "description": "更新OA申请模版",
+                "operationId": "updateUsingPOST_3",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OaApplyTemplateUpdateAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "100400": {
+                        "description": "OA申请模版编号已存在"
+                    },
+                    "100401": {
+                        "description": "OA申请模版不存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/add": {
+            "post": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "添加权限",
+                "description": "添加权限信息",
+                "operationId": "permissionAddUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PermissionAddAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "105002": {
+                        "description": "权限已存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/delete": {
+            "post": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "删除权限",
+                "description": "批量删除权限",
+                "operationId": "permissionDeleteUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PermissionDeleteAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/details": {
+            "get": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "查询权限详情",
+                "description": "查询权限详情",
+                "operationId": "permissionDetailsUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "权限Id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/PermissionInfoVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfPermissionInfoVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/org/role/list": {
+            "get": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "查询组织下所有角色（包含公共角色）",
+                "description": "查询组织下所有角色（包含租户公共角色）",
+                "operationId": "orgRoleListUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/UserRoleListVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfListOfSimpleRoleListVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/org/role/permission/list": {
+            "get": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "查询指定角色在组织内的所有权限",
+                "description": "查询指定角色在组织内的所有权限",
+                "operationId": "orgRolePermissionListUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "roleId",
+                        "in": "query",
+                        "description": "角色id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/PermissionParentListVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfListOfPermissionParentListVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/page": {
+            "get": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "查询权限列表",
+                "description": "查询权限列表，支持分页",
+                "operationId": "permissionPageUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "description": "当前页数",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "页大小",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "parentId",
+                        "in": "query",
+                        "description": "父权限ID",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "quickJump",
+                        "in": "query",
+                        "description": "快速开始菜单[0：是、1：否]",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "类型[0：主菜单、1：辅菜单、2：按钮、3：链接]",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "权限名，模糊查询",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "description": "权限编号，模糊查询",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/PermissionInfoVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfIPageOfPermissionInfoVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/parent/page": {
+            "get": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "查询父级权限列表",
+                "description": "查询所有父级权限列表",
+                "operationId": "permissionParentListUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/PermissionInfoVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfListOfPermissionParentListVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/role/add": {
+            "post": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "添加组织角色",
+                "description": "添加组织角色信息",
+                "operationId": "roleAddUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RoleAddAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "105000": {
+                        "description": "角色已存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfSimpleRoleListVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/role/batch/delete": {
+            "post": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "删除角色",
+                "description": "批量删除角色",
+                "operationId": "roleDeleteUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RoleDeleteAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "105004": {
+                        "description": "角色有用户担任"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/role/details": {
+            "get": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "查询角色详情",
+                "description": "查询组织角色详情",
+                "operationId": "roleDetailsUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "orgId",
+                        "in": "query",
+                        "description": "orgId",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "角色Id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/RoleInfoVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfRoleInfoVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/role/page": {
+            "get": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "查询角色列表",
+                "description": "查询组织角色列表，支持分页",
+                "operationId": "rolePageUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "description": "当前页数",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "页大小",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "roleName",
+                        "in": "query",
+                        "description": "角色名称，模糊查询",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "remark",
+                        "in": "query",
+                        "description": "备注，模糊查询",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "isDefaultRole",
+                        "in": "query",
+                        "description": "是否为机构默认角色，【yes：是，no：否】",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "isFindPermission",
+                        "in": "query",
+                        "description": "是否查询角色权限，[true：是，false：否(默认)]",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "orgId",
+                        "in": "query",
+                        "description": "机构ID，系统管理员可选择指定机构 非系统管理员只能查看自己所在机构的角色",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/RoleInfoVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfIPageOfRoleInfoVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/role/permission": {
+            "post": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "分配权限",
+                "description": "指定角色分配权限",
+                "operationId": "rolePermissionUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RolePermissionAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/role/permission/list": {
+            "get": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "查询角色权限列表",
+                "description": "查询查询角色所有权限列表, 指定角色拥有的权限checked为true",
+                "operationId": "rolePermissionListUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "roleId",
+                        "in": "query",
+                        "description": "角色id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/PermissionInfoVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfListOfRolePermissionListVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/role/update": {
+            "post": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "更新组织角色",
+                "description": "更新角色信息",
+                "operationId": "roleUpdateUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RoleUpdateAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "105000": {
+                        "description": "角色已存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/update": {
+            "post": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "更新权限",
+                "description": "更新权限信息",
+                "operationId": "permissionUpdateUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PermissionUpdateAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "105002": {
+                        "description": "权限已存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/user/permission/list": {
+            "get": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "查询指定用户在指定组织所有权限",
+                "description": "查询指定用户在指定组织所有权限",
+                "operationId": "userPermissionListUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "用户id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/PermissionParentListVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfListOfPermissionParentListVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/user/role": {
+            "post": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "分配角色",
+                "description": "指定组织用户分配角色",
+                "operationId": "userRoleUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UserRoleAO"
+                        }
+                    },
+                    {
+                        "name": "ROOT-ORG-ID",
+                        "in": "header",
+                        "description": "根组织ID",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/permission/user/role/list": {
+            "get": {
+                "tags": [
+                    "权限模块"
+                ],
+                "summary": "查询组织所有角色",
+                "description": "查询组织下所有角色, 指定用户拥有的角色, checked 为 true，若未指定用户则查询当前登录人",
+                "operationId": "userRoleListUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "用户id",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/UserRoleListVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfListOfUserRoleListVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/project/add": {
+            "post": {
+                "tags": [
+                    "项目模块"
+                ],
+                "summary": "添加项目",
+                "description": "添加项目",
+                "operationId": "addUsingPOST_4",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ProjectAddAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "100100": {
+                        "description": "项目编号已存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/project/batch/delete": {
+            "post": {
+                "tags": [
+                    "项目模块"
+                ],
+                "summary": "批量删除项目",
+                "description": "批量删除项目",
+                "operationId": "deleteUsingPOST_4",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ProjectDeleteAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/project/batch/delete/permanent": {
+            "post": {
+                "tags": [
+                    "项目模块"
+                ],
+                "summary": "批量物理删除项目",
+                "description": "批量物理删除项目",
+                "operationId": "permanentDeleteUsingPOST_4",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ProjectPermanentDeleteAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/project/details": {
+            "get": {
+                "tags": [
+                    "项目模块"
+                ],
+                "summary": "查询项目详情",
+                "description": "查询项目详情",
+                "operationId": "detailsUsingGET_4",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "项目id",
+                        "required": true,
+                        "type": "ref"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/ProjectDetailsVO"
+                        }
+                    },
+                    "100101": {
+                        "description": "项目不存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfProjectDetailsVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/project/page": {
+            "get": {
+                "tags": [
+                    "项目模块"
+                ],
+                "summary": "查询项目分页列表",
+                "description": "查询项目分页列表，支持分页",
+                "operationId": "pageUsingGET_4",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "description": "当前页数",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "页大小",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "description": "编号",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "名称",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "类型",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "master",
+                        "in": "query",
+                        "description": "负责人",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/ProjectPageVO"
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfIPageOfProjectPageVO"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/project/update": {
+            "post": {
+                "tags": [
+                    "项目模块"
+                ],
+                "summary": "更新项目",
+                "description": "更新项目",
+                "operationId": "updateUsingPOST_4",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ao",
+                        "description": "ao",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ProjectUpdateAO"
+                        }
+                    },
+                    {
+                        "name": "Auth-Token",
+                        "in": "header",
+                        "description": "token标记",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "0": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据"
+                        }
+                    },
+                    "100100": {
+                        "description": "项目编号已存在"
+                    },
+                    "100101": {
+                        "description": "项目不存在"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/响应数据OfVoid"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "AssetAddAO": {
+            "type": "object",
+            "required": [
+                "classId",
+                "code",
+                "name",
+                "projectId",
+                "state",
+                "total",
+                "type"
+            ],
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "位置信息"
+                },
+                "classId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "分类ID"
+                },
+                "code": {
+                    "type": "string",
+                    "example": "required",
+                    "description": "编号"
+                },
+                "imgUrl": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "图片"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "required",
+                    "description": "名称"
+                },
+                "owner": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "所属人"
+                },
+                "projectId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "项目ID"
+                },
+                "remark": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "备注"
+                },
+                "state": {
+                    "type": "string",
+                    "example": "unuse",
+                    "description": "设备状态[unuse：未使用、use：使用中、scrap：报废、rework：返工]"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "库存总量"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "asset",
+                    "description": "类型[asset：资产、consumable：耗材]"
+                }
+            },
+            "description": "添加资产AO"
+        },
+        "AssetClassAddAO": {
+            "type": "object",
+            "required": [
+                "code",
+                "name"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "required",
+                    "description": "编号"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "required",
+                    "description": "名称"
+                },
+                "parentId": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "父分类ID"
+                },
+                "remark": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "备注"
+                }
+            },
+            "description": "添加资产分类AO"
+        },
+        "AssetClassDeleteAO": {
+            "type": "object",
+            "required": [
+                "ids"
+            ],
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "example": "Required",
+                    "description": "ids",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "description": "批量删除资产分类AO"
+        },
+        "AssetClassDetailsVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "编号"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "主键"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "名称"
+                },
+                "parentId": {
+                    "type": "string",
+                    "description": "父分类ID"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                }
+            },
+            "description": "资产分类详情VO"
+        },
+        "AssetClassPageVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "编号"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "主键"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "名称"
+                },
+                "parentId": {
+                    "type": "string",
+                    "description": "父分类ID"
+                }
+            },
+            "description": "资产分类分页VO"
+        },
+        "AssetClassPermanentDeleteAO": {
+            "type": "object",
+            "required": [
+                "ids"
+            ],
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "example": "Required",
+                    "description": "ids",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "description": "批量真实删除资产分类AO"
+        },
+        "AssetClassUpdateAO": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "编号"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": "Required",
+                    "description": "主键"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "名称"
+                },
+                "parentId": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "父分类ID"
+                },
+                "remark": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "备注"
+                }
+            },
+            "description": "资产分类更新AO"
+        },
+        "AssetDeleteAO": {
+            "type": "object",
+            "required": [
+                "ids"
+            ],
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "description": "ids",
+                    "items": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "description": "批量删除资产AO"
+        },
+        "AssetDetailsVO": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "description": "位置信息"
+                },
+                "classId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "分类ID"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "编号"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "主键"
+                },
+                "imgUrl": {
+                    "type": "string",
+                    "description": "图片"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "名称"
+                },
+                "owner": {
+                    "type": "string",
+                    "description": "所属人"
+                },
+                "projectId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "项目ID"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "设备状态"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "库存总量"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "类型"
+                }
+            },
+            "description": "资产详情VO"
+        },
+        "AssetPageVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "编号"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "主键"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "名称"
+                },
+                "owner": {
+                    "type": "string",
+                    "description": "所属人"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "设备状态"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "库存总量"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "类型"
+                }
+            },
+            "description": "资产分页VO"
+        },
+        "AssetPermanentDeleteAO": {
+            "type": "object",
+            "required": [
+                "ids"
+            ],
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "description": "ids",
+                    "items": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "description": "批量真实删除资产AO"
+        },
+        "AssetUpdateAO": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "位置信息"
+                },
+                "classId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "分类ID"
+                },
+                "code": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "编号"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "主键"
+                },
+                "imgUrl": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "图片"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "名称"
+                },
+                "owner": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "所属人"
+                },
+                "projectId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "项目ID"
+                },
+                "remark": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "备注"
+                },
+                "state": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "设备状态[unuse：未使用、use：使用中、scrap：报废、rework：返工]"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "库存总量"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "类型[asset：资产、consumable：耗材]"
+                }
+            },
+            "description": "资产更新AO"
+        },
+        "CountInfoVO": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "邮箱"
+                },
+                "totalPrice": {
+                    "type": "number",
+                    "description": "总额"
+                }
+            },
+            "description": "示例统计VO"
+        },
+        "DemoAddAO": {
+            "type": "object",
+            "required": [
+                "code",
+                "email",
+                "price"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "required",
+                    "description": "编码，全局唯一（如商品码、订单号前缀等）"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "required",
+                    "description": "邮箱"
+                },
+                "price": {
+                    "type": "number",
+                    "example": "required",
+                    "description": "单价或金额（精确到4位小数）"
+                },
+                "startTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "not required",
+                    "description": "开始时间（日期+时间）"
+                },
+                "state": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": "not required",
+                    "description": "状态 [0：草稿、1：正常/启用、2：禁用、3：已过期]"
+                }
+            },
+            "description": "添加示例AO"
+        },
+        "DemoDeleteAO": {
+            "type": "object",
+            "required": [
+                "ids"
+            ],
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "example": "Required",
+                    "description": "ids",
+                    "items": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "description": "批量删除示例AO"
+        },
+        "DemoDetailsVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "编码，全局唯一（如商品码、订单号前缀等）"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "邮箱"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "唯一标识"
+                },
+                "price": {
+                    "type": "number",
+                    "description": "单价或金额（精确到4位小数）"
+                },
+                "startTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "开始时间（日期+时间）"
+                },
+                "state": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "状态 [0：草稿、1：正常/启用、2：禁用、3：已过期]"
+                }
+            },
+            "description": "示例详情"
+        },
+        "DemoPageVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "编码，全局唯一（如商品码、订单号前缀等）"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "邮箱"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "唯一标识"
+                },
+                "price": {
+                    "type": "number",
+                    "description": "单价或金额（精确到4位小数）"
+                },
+                "startTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "开始时间（日期+时间）"
+                },
+                "state": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "状态 [0：草稿、1：正常/启用、2：禁用、3：已过期]"
+                }
+            },
+            "description": "示例分页VO"
+        },
+        "DemoPermanentDeleteAO": {
+            "type": "object",
+            "required": [
+                "ids"
+            ],
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "example": "Required",
+                    "description": "ids",
+                    "items": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "description": "批量真实删除示例AO"
+        },
+        "DemoUpdateAO": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "编码，全局唯一（如商品码、订单号前缀等）"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "邮箱"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "Required",
+                    "description": "唯一标识"
+                },
+                "price": {
+                    "type": "number",
+                    "example": "not required",
+                    "description": "单价或金额（精确到4位小数）"
+                },
+                "startTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "not required",
+                    "description": "开始时间（日期+时间）"
+                },
+                "state": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": "not required",
+                    "description": "状态 [0：草稿、1：正常/启用、2：禁用、3：已过期]"
+                }
+            },
+            "description": "示例更新AO"
+        },
+        "IPageOfAssetClassPageVO": {
+            "type": "object",
+            "properties": {
+                "current": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "pages": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "records": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AssetClassPageVO"
+                    }
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "IPageOfAssetPageVO": {
+            "type": "object",
+            "properties": {
+                "current": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "pages": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "records": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AssetPageVO"
+                    }
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "IPageOfCountInfoVO": {
+            "type": "object",
+            "properties": {
+                "current": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "pages": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "records": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CountInfoVO"
+                    }
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "IPageOfDemoPageVO": {
+            "type": "object",
+            "properties": {
+                "current": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "pages": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "records": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DemoPageVO"
+                    }
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "IPageOfOaApplyTemplatePageVO": {
+            "type": "object",
+            "properties": {
+                "current": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "pages": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "records": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OaApplyTemplatePageVO"
+                    }
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "IPageOfPermissionInfoVO": {
+            "type": "object",
+            "properties": {
+                "current": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "pages": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "records": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PermissionInfoVO"
+                    }
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "IPageOfProjectPageVO": {
+            "type": "object",
+            "properties": {
+                "current": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "pages": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "records": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ProjectPageVO"
+                    }
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "IPageOfRoleInfoVO": {
+            "type": "object",
+            "properties": {
+                "current": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "pages": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "records": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RoleInfoVO"
+                    }
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "LoginAo": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "example": "Required",
+                    "description": "密码"
+                },
+                "username": {
+                    "type": "string",
+                    "example": "Required",
+                    "description": "账号"
+                }
+            },
+            "description": "登录信息"
+        },
+        "LoginUserInfoVo": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "邮件"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "主键"
+                },
+                "imgUrl": {
+                    "type": "string",
+                    "description": "头像http地址"
+                },
+                "lastLoginTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "最近一次登录时间"
+                },
+                "lockReason": {
+                    "type": "string",
+                    "description": "锁定理由"
+                },
+                "lockState": {
+                    "type": "string",
+                    "description": "锁定状态[0：未锁定、1：锁定]"
+                },
+                "nickname": {
+                    "type": "string",
+                    "description": "昵称"
+                },
+                "orgId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "机构ID"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "电话"
+                },
+                "token": {
+                    "type": "string",
+                    "description": "用户凭证"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "用户类型[system：系统用户、org：机构用户]"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "用户名"
+                },
+                "wxNo": {
+                    "type": "string",
+                    "description": "微信号"
+                }
+            },
+            "description": "登录用户响应"
+        },
+        "OaApplyTemplateAddAO": {
+            "type": "object",
+            "required": [
+                "code",
+                "name"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "required",
+                    "description": "编号"
+                },
+                "dingComponentData": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "钉钉组件数据结构, json格式"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "required",
+                    "description": "名称"
+                },
+                "path": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "本地路径"
+                },
+                "remark": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "备注"
+                },
+                "url": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "网络路径"
+                }
+            },
+            "description": "添加OA申请模版AO"
+        },
+        "OaApplyTemplateDeleteAO": {
+            "type": "object",
+            "required": [
+                "ids"
+            ],
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "example": "Required",
+                    "description": "ids",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "description": "批量删除OA申请模版AO"
+        },
+        "OaApplyTemplateDetailsVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "编号"
+                },
+                "dingComponentData": {
+                    "type": "string",
+                    "description": "钉钉组件数据结构, json格式"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "主键"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "名称"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "本地路径"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                },
+                "url": {
+                    "type": "string",
+                    "description": "网络路径"
+                }
+            },
+            "description": "OA申请模版详情VO"
+        },
+        "OaApplyTemplatePageVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "编号"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "主键"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "名称"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "本地路径"
+                },
+                "url": {
+                    "type": "string",
+                    "description": "网络路径"
+                }
+            },
+            "description": "OA申请模版分页VO"
+        },
+        "OaApplyTemplatePermanentDeleteAO": {
+            "type": "object",
+            "required": [
+                "ids"
+            ],
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "example": "Required",
+                    "description": "ids",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "description": "批量真实删除OA申请模版AO"
+        },
+        "OaApplyTemplateUpdateAO": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "编号"
+                },
+                "dingComponentData": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "钉钉组件数据结构, json格式"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": "Required",
+                    "description": "主键"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "名称"
+                },
+                "path": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "本地路径"
+                },
+                "remark": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "备注"
+                },
+                "url": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "网络路径"
+                }
+            },
+            "description": "OA申请模版更新AO"
+        },
+        "PermissionAddAO": {
+            "type": "object",
+            "required": [
+                "code",
+                "name",
+                "type"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "Required",
+                    "description": "权限码"
+                },
+                "iconUrl": {
+                    "type": "string",
+                    "example": "No Required",
+                    "description": "图标url"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Required",
+                    "description": "权限名"
+                },
+                "parentId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "No Required",
+                    "description": "父权限ID 说明：父权限无父权限Id"
+                },
+                "quickJump": {
+                    "type": "string",
+                    "example": "No Required",
+                    "description": "快速开始菜单[0：是、1：否（默认）]"
+                },
+                "remark": {
+                    "type": "string",
+                    "example": "No Required",
+                    "description": "备注"
+                },
+                "routeKey": {
+                    "type": "string",
+                    "example": "No Required",
+                    "description": "前端路由唯一标识, 由前端开发者提供。"
+                },
+                "sort": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": "No Required",
+                    "description": "排序"
+                },
+                "tenantId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "No Required",
+                    "description": "租户ID"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "Required",
+                    "description": "类型[0：主菜单、1：辅菜单、2：按钮、3：链接]"
+                }
+            },
+            "description": "添加权限AO"
+        },
+        "PermissionDeleteAO": {
+            "type": "object",
+            "required": [
+                "ids"
+            ],
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "example": "Required",
+                    "description": "ids",
+                    "items": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "description": "批量删除权限AO"
+        },
+        "PermissionInfoVO": {
+            "type": "object",
+            "properties": {
+                "children": {
+                    "type": "array",
+                    "description": "子权限列表",
+                    "items": {
+                        "$ref": "#/definitions/PermissionInfoVO"
+                    }
+                },
+                "code": {
+                    "type": "string",
+                    "description": "权限码"
+                },
+                "iconUrl": {
+                    "type": "string",
+                    "description": "图标url"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Id"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "权限名"
+                },
+                "orgId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "组织ID"
+                },
+                "orgName": {
+                    "type": "string",
+                    "description": "机构名"
+                },
+                "parentId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "父权限ID"
+                },
+                "parentName": {
+                    "type": "string",
+                    "description": "父权限名"
+                },
+                "quickJump": {
+                    "type": "string",
+                    "description": "快速开始菜单[0：是、1：否]"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                },
+                "routeKey": {
+                    "type": "string",
+                    "description": "前端路由唯一标识, 由前端开发者提供。"
+                },
+                "sort": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "排序"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "类型[0：主菜单、1：辅菜单、2：按钮、3：链接]"
+                }
+            },
+            "description": "权限详情"
+        },
+        "PermissionParentListVO": {
+            "type": "object",
+            "properties": {
+                "children": {
+                    "type": "array",
+                    "description": "子权限列表",
+                    "items": {
+                        "$ref": "#/definitions/PermissionInfoVO"
+                    }
+                },
+                "code": {
+                    "type": "string",
+                    "description": "权限名"
+                },
+                "iconUrl": {
+                    "type": "string",
+                    "description": "图标url"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Id"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "权限名"
+                },
+                "orgId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "组织ID"
+                },
+                "orgName": {
+                    "type": "string",
+                    "description": "机构名"
+                },
+                "parentId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "父权限ID"
+                },
+                "quickJump": {
+                    "type": "string",
+                    "description": "快速开始菜单[0：是、1：否]"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                },
+                "routeKey": {
+                    "type": "string",
+                    "description": "前端路由唯一标识, 由前端开发者提供。"
+                },
+                "sort": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "排序"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "类型[0：主菜单、1：辅菜单、2：按钮、3：链接]"
+                }
+            },
+            "description": "父权限列表VO"
+        },
+        "PermissionUpdateAO": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "No Required",
+                    "description": "权限码"
+                },
+                "iconUrl": {
+                    "type": "string",
+                    "example": "No Required",
+                    "description": "图标url"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "Required",
+                    "description": "Id"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "No Required",
+                    "description": "权限名"
+                },
+                "parentId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "No Required",
+                    "description": "父权限ID 说明：父权限无父权限Id"
+                },
+                "quickJump": {
+                    "type": "string",
+                    "example": "No Required",
+                    "description": "快速开始菜单[0：是、1：否]"
+                },
+                "remark": {
+                    "type": "string",
+                    "example": "No Required",
+                    "description": "备注"
+                },
+                "routeKey": {
+                    "type": "string",
+                    "example": "No Required",
+                    "description": "前端路由唯一标识, 由前端开发者提供。"
+                },
+                "sort": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": "No Required",
+                    "description": "排序"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "No Required",
+                    "description": "类型[0：主菜单、1：辅菜单、2：按钮、3：链接]"
+                }
+            },
+            "description": "更新权限AO"
+        },
+        "ProjectAddAO": {
+            "type": "object",
+            "required": [
+                "code",
+                "name",
+                "type"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "required",
+                    "description": "编号"
+                },
+                "master": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "负责人"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "required",
+                    "description": "名称"
+                },
+                "remark": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "备注"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "product_dev",
+                    "description": "类型[product_dev：产品开发、odm：ODM、pre_research：预研、tech_dev：技术开发、oem：OEM、product_maintenance：产品维护、tech_maintenance：技术维护]"
+                }
+            },
+            "description": "添加项目AO"
+        },
+        "ProjectDeleteAO": {
+            "type": "object",
+            "required": [
+                "ids"
+            ],
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "example": "Required",
+                    "description": "ids",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "description": "批量删除项目AO"
+        },
+        "ProjectDetailsVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "编号"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "主键"
+                },
+                "master": {
+                    "type": "string",
+                    "description": "负责人"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "名称"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "类型"
+                }
+            },
+            "description": "项目详情VO"
+        },
+        "ProjectPageVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "编号"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "主键"
+                },
+                "master": {
+                    "type": "string",
+                    "description": "负责人"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "名称"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "类型"
+                }
+            },
+            "description": "项目分页VO"
+        },
+        "ProjectPermanentDeleteAO": {
+            "type": "object",
+            "required": [
+                "ids"
+            ],
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "example": "Required",
+                    "description": "ids",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "description": "批量真实删除项目AO"
+        },
+        "ProjectUpdateAO": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "编号"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": "Required",
+                    "description": "主键"
+                },
+                "master": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "负责人"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "名称"
+                },
+                "remark": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "备注"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "not required",
+                    "description": "类型[product_dev：产品开发、odm：ODM、pre_research：预研、tech_dev：技术开发、oem：OEM、product_maintenance：产品维护、tech_maintenance：技术维护]"
+                }
+            },
+            "description": "项目更新AO"
+        },
+        "RoleAddAO": {
+            "type": "object",
+            "required": [
+                "remark",
+                "roleName"
+            ],
+            "properties": {
+                "isDefaultRole": {
+                    "type": "boolean",
+                    "example": false,
+                    "description": "是否为机构公共角色【true：是，false：否(默认)】"
+                },
+                "remark": {
+                    "type": "string",
+                    "example": "Required",
+                    "description": "角色说明"
+                },
+                "roleName": {
+                    "type": "string",
+                    "example": "Required",
+                    "description": "角色名"
+                }
+            },
+            "description": "添加角色AO"
+        },
+        "RoleDeleteAO": {
+            "type": "object",
+            "required": [
+                "ids"
+            ],
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "example": "Required",
+                    "description": "ids",
+                    "items": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "description": "批量删除角色AO"
+        },
+        "RoleInfoVO": {
+            "type": "object",
+            "properties": {
+                "defaultRole": {
+                    "type": "string",
+                    "description": "是否为租户公共角色【yes：是，no：否】"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Id"
+                },
+                "orgId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "组织ID"
+                },
+                "permissions": {
+                    "type": "array",
+                    "description": "权限列表",
+                    "items": {
+                        "$ref": "#/definitions/PermissionInfoVO"
+                    }
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "角色说明"
+                },
+                "roleName": {
+                    "type": "string",
+                    "description": "角色名"
+                }
+            },
+            "description": "角色详情"
+        },
+        "RolePermissionAO": {
+            "type": "object",
+            "required": [
+                "permissionIds",
+                "roleId"
+            ],
+            "properties": {
+                "permissionIds": {
+                    "type": "array",
+                    "example": "Required",
+                    "description": "权限 id 数组",
+                    "items": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "roleId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "Required",
+                    "description": "角色id"
+                }
+            },
+            "description": "角色分配权限AO"
+        },
+        "RolePermissionListVO": {
+            "type": "object",
+            "properties": {
+                "checked": {
+                    "type": "string",
+                    "description": "有无权限[true：有，false：无]"
+                },
+                "iconUrl": {
+                    "type": "string",
+                    "description": "图标url"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "权限ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "权限名"
+                },
+                "parentId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "父权限Id"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "权限类型"
+                }
+            },
+            "description": "角色权限列表"
+        },
+        "RoleUpdateAO": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "Required",
+                    "description": "Id"
+                },
+                "remark": {
+                    "type": "string",
+                    "example": "No Required",
+                    "description": "角色说明"
+                },
+                "roleName": {
+                    "type": "string",
+                    "example": "No Required",
+                    "description": "角色名"
+                }
+            },
+            "description": "角色更新AO"
+        },
+        "SimpleRoleListVO": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "角色id"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "角色名"
+                },
+                "orgId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "组织ID"
+                }
+            },
+            "description": "简单角色列表"
+        },
+        "UserRoleAO": {
+            "type": "object",
+            "required": [
+                "roleIds",
+                "userId"
+            ],
+            "properties": {
+                "roleIds": {
+                    "type": "array",
+                    "example": "Required",
+                    "description": "角色id",
+                    "items": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "userId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "Required",
+                    "description": "用户id"
+                }
+            },
+            "description": "用户分配角色AO"
+        },
+        "UserRoleListVO": {
+            "type": "object",
+            "properties": {
+                "checked": {
+                    "type": "string",
+                    "description": "是否有此角色[true：有此角色，false：无此角色]"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "角色id"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "角色名"
+                },
+                "orgId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "组织ID"
+                }
+            },
+            "description": "用户角色列表"
+        },
+        "响应数据": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "type": "object",
+                    "description": "对应返回数据"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfAssetClassDetailsVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/AssetClassDetailsVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfAssetDetailsVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/AssetDetailsVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfDemoDetailsVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/DemoDetailsVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfIPageOfAssetClassPageVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/IPageOfAssetClassPageVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfIPageOfAssetPageVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/IPageOfAssetPageVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfIPageOfCountInfoVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/IPageOfCountInfoVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfIPageOfDemoPageVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/IPageOfDemoPageVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfIPageOfOaApplyTemplatePageVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/IPageOfOaApplyTemplatePageVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfIPageOfPermissionInfoVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/IPageOfPermissionInfoVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfIPageOfProjectPageVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/IPageOfProjectPageVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfIPageOfRoleInfoVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/IPageOfRoleInfoVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfListOfPermissionParentListVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "对应返回数据",
+                    "items": {
+                        "$ref": "#/definitions/PermissionParentListVO"
+                    }
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfListOfRolePermissionListVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "对应返回数据",
+                    "items": {
+                        "$ref": "#/definitions/RolePermissionListVO"
+                    }
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfListOfSimpleRoleListVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "对应返回数据",
+                    "items": {
+                        "$ref": "#/definitions/SimpleRoleListVO"
+                    }
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfListOfUserRoleListVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "对应返回数据",
+                    "items": {
+                        "$ref": "#/definitions/UserRoleListVO"
+                    }
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfLoginUserInfoVo": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/LoginUserInfoVo"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfOaApplyTemplateDetailsVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/OaApplyTemplateDetailsVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfPermissionInfoVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/PermissionInfoVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfProjectDetailsVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/ProjectDetailsVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfRoleInfoVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/RoleInfoVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfSimpleRoleListVO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "data": {
+                    "description": "对应返回数据",
+                    "$ref": "#/definitions/SimpleRoleListVO"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        },
+        "响应数据OfVoid": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "错误代码"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "reqId": {
+                    "type": "string",
+                    "description": "请求号"
+                }
+            }
+        }
+    }
+}

@@ -1,4 +1,6 @@
-import type { Recordable, UserInfo } from '@vben/types';
+import type { UserInfo } from '@vben/types';
+
+import type { LoginAo } from '#/api/types';
 
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -10,6 +12,7 @@ import { resetAllStores, useAccessStore, useUserStore } from '@vben/stores';
 import { notification } from 'ant-design-vue';
 import { defineStore } from 'pinia';
 
+import { apiLogin } from '#/api';
 import { $t } from '#/locales';
 
 export const useAuthStore = defineStore('auth', () => {
@@ -25,7 +28,7 @@ export const useAuthStore = defineStore('auth', () => {
    * @param params 登录表单数据
    */
   async function authLogin(
-    params: Recordable<any>,
+    params: LoginAo,
     onSuccess?: () => Promise<void> | void,
   ) {
     // 异步处理用户登录操作并获取 accessToken
@@ -33,32 +36,24 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       loginLoading.value = true;
 
-      // TODO: 实现实际的登录 API 调用
-      // const { accessToken } = await loginApi(params);
+      // 调用登录 API
+      const response = await apiLogin(params);
+      const loginUserInfo = response.data.data;
 
-      // 临时模拟登录成功
-      const accessToken = 'mock-access-token';
+      // 如果成功获取到 token
+      if (loginUserInfo?.token) {
+        accessStore.setAccessToken(loginUserInfo.token);
 
-      // 如果成功获取到 accessToken
-      if (accessToken) {
-        accessStore.setAccessToken(accessToken);
-
-        // 获取用户信息并存储到 accessStore 中
-        // TODO: 实现实际的 API 调用
-        // const [fetchUserInfoResult, accessCodes] = await Promise.all([
-        //   fetchUserInfo(),
-        //   getAccessCodesApi(),
-        // ]);
-
-        // 临时模拟用户信息
+        // 构建用户信息
         userInfo = {
-          userId: '1',
-          username: params.username || 'admin',
-          realName: 'Admin User',
-          avatar: '',
+          userId: loginUserInfo.id,
+          username: loginUserInfo.username,
+          realName: loginUserInfo.nickname,
+          avatar: loginUserInfo.imgUrl || '',
           desc: '',
           homePath: '/dashboard',
           roles: ['admin'],
+          token: loginUserInfo.token,
         };
 
         userStore.setUserInfo(userInfo);
@@ -74,9 +69,9 @@ export const useAuthStore = defineStore('auth', () => {
               );
         }
 
-        if (userInfo?.realName) {
+        if (userInfo.realName) {
           notification.success({
-            description: `${$t('authentication.loginSuccessDesc')}:${userInfo?.realName}`,
+            description: `${$t('authentication.loginSuccessDesc')}:${userInfo.realName}`,
             duration: 3,
             message: $t('authentication.loginSuccess'),
           });
@@ -135,6 +130,7 @@ export const useAuthStore = defineStore('auth', () => {
       desc: '',
       homePath: '/dashboard',
       roles: ['admin'],
+      token: 'mock-token',
     };
 
     userStore.setUserInfo(userInfo);
