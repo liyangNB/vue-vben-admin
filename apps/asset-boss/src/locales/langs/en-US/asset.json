@@ -1,20 +1,21 @@
 {
+  "title": "Asset Management",
   "assetClass": {
-    "menuName": "Asset Class"
+    "menuName": "Asset Classification"
   },
   "asset": {
-    "menuName": "Asset",
+    "menuName": "Asset List",
     "analytics": "Analytics",
     "workspace": "Workspace",
     "name": "Name",
     "code": "Code",
     "type": "Type",
-    "state": "State",
+    "state": "Device Status",
     "owner": "Owner",
-    "classId": "Class",
+    "classId": "Classification",
     "projectId": "Project",
-    "total": "Total",
-    "address": "Address",
+    "total": "Total Inventory",
+    "address": "Location Information",
     "imgUrl": "Image",
     "remark": "Remark",
     "typeAsset": "Asset",
@@ -24,28 +25,14 @@
     "stateScrap": "Scrapped",
     "stateRework": "Rework"
   },
-  "project": {
-    "menuName": "Project Management",
-    "name": "Name",
-    "code": "Code",
-    "type": "Type",
-    "master": "Master",
-    "remark": "Remark",
-    "typeProductDev": "Product Development",
-    "typeOdm": "ODM",
-    "typePreResearch": "Pre-research",
-    "typeTechDev": "Technology Development",
-    "typeOem": "OEM",
-    "typeProductMaintenance": "Product Maintenance",
-    "typeTechMaintenance": "Technology Maintenance"
-  },
   "class": {
+    "button": "Add Asset Classification",
     "name": "Name",
     "code": "Code",
-    "parentId": "Parent ID",
-    "parentName": "Parent Class",
+    "parentId": "Parent Classification ID",
+    "parentName": "Parent Classification",
     "addChild": "Add Child",
     "remark": "Remark",
-    "deleteWarning": "Deleting this class will also delete all assets under it. Please proceed with caution!"
+    "deleteWarning": "After deleting this classification, all assets under this classification will also be deleted synchronously. Please operate with caution!"
   }
 }

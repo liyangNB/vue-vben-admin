@@ -1,0 +1,17 @@
+{
+  "project": {
+    "menuName": "Project Management",
+    "name": "Name",
+    "code": "Code",
+    "type": "Type",
+    "master": "Manager",
+    "remark": "Remark",
+    "typeProductDev": "Product Development",
+    "typeOdm": "ODM",
+    "typePreResearch": "Pre-research",
+    "typeTechDev": "Technology Development",
+    "typeOem": "OEM",
+    "typeProductMaintenance": "Product Maintenance",
+    "typeTechMaintenance": "Technology Maintenance"
+  }
+}

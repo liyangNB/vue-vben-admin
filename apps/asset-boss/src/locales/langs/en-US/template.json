@@ -26,6 +26,7 @@
     "syncAllSuccess": "All templates synced successfully",
     "syncSingleSuccess": "Template {0} synced successfully",
     "syncAllError": "Template sync failed",
-    "syncSingleError": "Template {0} sync failed"
+    "syncSingleError": "Template {0} sync failed",
+    "loadDetailError": "Failed to load template details"
   }
 }

@@ -26,6 +26,7 @@
     "syncAllSuccess": "所有模版同步成功",
     "syncSingleSuccess": "模版 {0} 同步成功",
     "syncAllError": "模版同步失败",
-    "syncSingleError": "模版 {0} 同步失败"
+    "syncSingleError": "模版 {0} 同步失败",
+    "loadDetailError": "加载模版详情失败"
   }
 }
