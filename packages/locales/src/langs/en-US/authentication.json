@@ -1,10 +1,10 @@
 {
   "welcomeBack": "Welcome Back",
-  "pageTitle": "Plug-and-play Admin system",
-  "pageDesc": "Efficient, versatile frontend template",
+  "pageTitle": "Asset & Consumables Management System",
+  "pageDesc": "Excellent asset management is the lifeblood of a company’s long-term survival.",
   "loginSuccess": "Login Successful",
   "loginSuccessDesc": "Welcome Back",
-  "loginSubtitle": "Enter your account details to manage your projects",
+  "loginSubtitle": "Please enter your account details to manage your assets",
   "selectAccount": "Quick Select Account",
   "username": "Username",
   "password": "Password",
