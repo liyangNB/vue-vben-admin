@@ -1,0 +1,31 @@
+{
+  "template": {
+    "menuName": "Template Management",
+    "name": "Name",
+    "code": "Code",
+    "url": "URL",
+    "path": "Path",
+    "remark": "Remark",
+    "id": "ID",
+    "details": "Template Details",
+    "dingComponentData": "DingTalk Component Data",
+    "syncFromDingTalk": "Sync from DingTalk",
+    "syncConfirmTitle": "Sync Templates",
+    "syncMode": "Sync Mode",
+    "syncAll": "Sync All Templates",
+    "syncSingle": "Sync Specific Template",
+    "templateCodeLabel": "Template Code",
+    "templateCodePlaceholder": "Enter template code to sync",
+    "templateCodeRequired": "Please enter template code",
+    "syncDescription": "Choose sync mode, you can sync all templates or a specific template by code",
+    "syncAllDescription": "Sync all template information from DingTalk to the system",
+    "syncSingleDescription": "Sync specific template information from DingTalk to the system",
+    "syncingAll": "Syncing all templates...",
+    "syncingSingle": "Syncing template {0}...",
+    "syncSuccess": "Template synced successfully",
+    "syncAllSuccess": "All templates synced successfully",
+    "syncSingleSuccess": "Template {0} synced successfully",
+    "syncAllError": "Template sync failed",
+    "syncSingleError": "Template {0} sync failed"
+  }
+}

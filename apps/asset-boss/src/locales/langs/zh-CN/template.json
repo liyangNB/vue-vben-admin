@@ -1,0 +1,31 @@
+{
+  "template": {
+    "menuName": "模版管理",
+    "name": "名称",
+    "code": "编号",
+    "url": "网络路径",
+    "path": "本地路径",
+    "remark": "备注",
+    "id": "主键",
+    "details": "模版详情",
+    "dingComponentData": "钉钉组件数据",
+    "syncFromDingTalk": "从钉钉同步",
+    "syncConfirmTitle": "同步模版",
+    "syncMode": "同步模式",
+    "syncAll": "同步所有模版",
+    "syncSingle": "同步指定模版",
+    "templateCodeLabel": "模版编号",
+    "templateCodePlaceholder": "请输入要同步的模版编号",
+    "templateCodeRequired": "请输入模版编号",
+    "syncDescription": "选择同步模式，可以同步所有模版或指定编号的模版",
+    "syncAllDescription": "将从钉钉同步所有模版信息到系统中",
+    "syncSingleDescription": "将从钉钉同步指定编号的模版信息到系统中",
+    "syncingAll": "正在同步所有模版...",
+    "syncingSingle": "正在同步模版 {0}...",
+    "syncSuccess": "模版同步成功",
+    "syncAllSuccess": "所有模版同步成功",
+    "syncSingleSuccess": "模版 {0} 同步成功",
+    "syncAllError": "模版同步失败",
+    "syncSingleError": "模版 {0} 同步失败"
+  }
+}
