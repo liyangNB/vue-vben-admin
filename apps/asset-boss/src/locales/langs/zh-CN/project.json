@@ -1,0 +1,17 @@
+{
+  "project": {
+    "menuName": "项目管理",
+    "name": "名称",
+    "code": "编号",
+    "type": "类型",
+    "master": "负责人",
+    "remark": "备注",
+    "typeProductDev": "产品开发",
+    "typeOdm": "ODM",
+    "typePreResearch": "预研",
+    "typeTechDev": "技术开发",
+    "typeOem": "OEM",
+    "typeProductMaintenance": "产品维护",
+    "typeTechMaintenance": "技术维护"
+  }
+}
