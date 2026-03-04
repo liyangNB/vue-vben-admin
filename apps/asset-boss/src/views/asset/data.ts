@@ -58,6 +58,14 @@ export function useColumns(
       title: $t('asset.asset.code'),
     },
     {
+      field: 'className',
+      title: $t('asset.asset.classId'),
+    },
+    {
+      field: 'projectName',
+      title: $t('asset.asset.projectId'),
+    },
+    {
       align: 'center',
       cellRender: { name: 'CellTag', options: getAssetTypeOptions() },
       field: 'type',
