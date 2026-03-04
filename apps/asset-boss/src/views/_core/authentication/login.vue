@@ -22,16 +22,8 @@ async function handleLogin(params: Recordable<any>) {
 
 const MOCK_USER_OPTIONS: BasicOption[] = [
   {
-    label: 'Super',
-    value: 'vben',
-  },
-  {
     label: 'Admin',
     value: 'admin',
-  },
-  {
-    label: 'User',
-    value: 'jack',
   },
 ];
 
@@ -49,7 +41,7 @@ const formSchema = computed((): VbenFormSchema[] => {
         .string()
         .min(1, { message: $t('authentication.selectAccount') })
         .optional()
-        .default('vben'),
+        .default('admin'),
     },
     {
       component: 'VbenInput',
@@ -64,7 +56,7 @@ const formSchema = computed((): VbenFormSchema[] => {
             );
             if (findUser) {
               form.setValues({
-                password: '123456',
+                password: '',
                 username: findUser.value,
               });
             }

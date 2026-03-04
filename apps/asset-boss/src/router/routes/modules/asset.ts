@@ -1,13 +1,11 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-import { VBEN_LOGO_URL } from '@vben/constants';
-
 import { $t } from '#/locales';
 
 const routes: RouteRecordRaw[] = [
   {
     meta: {
-      icon: VBEN_LOGO_URL,
+      icon: 'lucide:badge-dollar-sign',
       order: 9998,
       title: $t('asset.title'),
     },

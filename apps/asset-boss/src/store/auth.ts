@@ -51,7 +51,8 @@ export const useAuthStore = defineStore('auth', () => {
           realName: loginUserInfo.nickname,
           avatar: loginUserInfo.imgUrl || '',
           desc: '',
-          homePath: '/dashboard',
+          homePath: '/project/list',
+          // homePath: '/dashboard',
           roles: ['admin'],
           token: loginUserInfo.token,
         };

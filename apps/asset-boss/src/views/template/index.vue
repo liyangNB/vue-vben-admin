@@ -89,8 +89,16 @@ function onRefresh() {
 }
 
 async function onDetail(row: TemplatePageVO) {
-  const template = await apiTemplateDetails({ id: row.id!.toString() });
-  detailRef.value?.drawerApi.setData(template).open();
+  try {
+    const template = await apiTemplateDetails({ id: row.id!.toString() });
+    if (detailRef.value?.drawerApi) {
+      detailRef.value.drawerApi.setData(template);
+      detailRef.value.drawerApi.open();
+    }
+  } catch (error) {
+    console.error(error);
+    message.error($t('template.template.loadDetailError'));
+  }
 }
 
 function onSync() {

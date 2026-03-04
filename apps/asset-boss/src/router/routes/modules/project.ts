@@ -6,11 +6,11 @@ const routes: RouteRecordRaw[] = [
   {
     component: () => import('#/views/project/index.vue'),
     meta: {
-      icon: 'lucide:copyright',
+      icon: 'lucide:airplay',
       title: $t('project.project.menuName'),
     },
     name: 'VbenAbout',
-    path: '/vben-admin/about',
+    path: '/project/list',
   },
 ];
 

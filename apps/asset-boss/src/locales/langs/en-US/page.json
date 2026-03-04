@@ -2,13 +2,13 @@
   "auth": {
     "login": "Login",
     "register": "Register",
-    "codeLogin": "Verification Code Login",
+    "codeLogin": "Code Code Login",
     "qrcodeLogin": "QR Code Login",
-    "forgetPassword": "Forgot Password",
-    "profile": "Personal Center"
+    "forgetPassword": "Forget Password",
+    "profile": "Profile"
   },
   "dashboard": {
-    "title": "Overview",
+    "title": "Dashboard",
     "analytics": "Analytics",
     "workspace": "Workspace"
   }
