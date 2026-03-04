@@ -2,3 +2,4 @@ export * from './asset';
 export * from './common';
 export * from './project';
 export * from './template';
+export * from './user';
