@@ -13,6 +13,7 @@ import { useVbenForm, z } from '#/adapter/form';
 import {
   apiAssetAdd,
   apiAssetClassPage,
+  apiAssetClassTree,
   apiAssetUpdate,
   apiCommonUpFile,
   apiProjectPage,
@@ -45,6 +46,29 @@ const schema: VbenFormSchema[] = [
       .string()
       .min(1, $t('ui.formRules.required', [$t('asset.asset.name')]))
       .max(100, $t('ui.formRules.maxLength', [$t('asset.asset.name'), 100])),
+  },
+  {
+    component: 'ApiTreeSelect',
+    componentProps: {
+      class: 'w-full',
+      allowClear: true,
+      api: async () => {
+        const response = await apiAssetClassTree();
+        return response;
+      },
+      childrenField: 'children',
+      getPopupContainer,
+      immediate: true,
+      labelField: 'name',
+      showSearch: true,
+      treeDefaultExpandAll: true,
+      valueField: 'id',
+    },
+    fieldName: 'model',
+    label: $t('asset.asset.model'),
+    rules: z
+      .string()
+      .min(1, $t('ui.formRules.required', [$t('asset.asset.model')])),
   },
   {
     component: 'RadioGroup',
@@ -141,7 +165,7 @@ const schema: VbenFormSchema[] = [
       min: 0,
     },
     defaultValue: 1,
-    fieldName: 'total',
+    fieldName: 'quantity',
     label: $t('asset.asset.total'),
     rules: z
       .number()

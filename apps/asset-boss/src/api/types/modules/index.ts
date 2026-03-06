@@ -5,6 +5,7 @@ export * from './asset-class-details-vo';
 export * from './asset-class-page-ao';
 export * from './asset-class-page-vo';
 export * from './asset-class-permanent-delete-ao';
+export * from './asset-class-tree-vo';
 export * from './asset-class-update-ao';
 export * from './asset-delete-ao';
 export * from './asset-details-vo';

@@ -6,6 +6,7 @@ import type {
   AssetClassPageAO,
   AssetClassPageVO,
   AssetClassPermanentDeleteAO,
+  AssetClassTreeVO,
   AssetClassUpdateAO,
   AssetDeleteAO,
   AssetDetailsVO,
@@ -34,6 +35,7 @@ const assetUrl = {
   assetClassDetails: `${prefixAssetClass}/details`,
   assetClassPage: `${prefixAssetClass}/page`,
   assetClassUpdate: `${prefixAssetClass}/update`,
+  assetClassTree: `${prefixAssetClass}/tree`,
 };
 
 export namespace AssetApi {
@@ -155,4 +157,12 @@ export async function apiAssetClassDetails(params: { id: string }) {
  */
 export async function apiAssetClassUpdate(data: AssetClassUpdateAO) {
   return requestClient.post(assetUrl.assetClassUpdate, data);
+}
+
+/**
+ * 查询资产分类树形结构
+ * @returns AssetClassTreeVO[]
+ */
+export async function apiAssetClassTree() {
+  return requestClient.get<AssetClassTreeVO[]>(assetUrl.assetClassTree);
 }

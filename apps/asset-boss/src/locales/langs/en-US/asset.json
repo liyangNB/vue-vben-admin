@@ -13,6 +13,7 @@
     "state": "Device Status",
     "owner": "Owner",
     "classId": "Classification",
+    "model": "Model",
     "projectId": "Project",
     "total": "Total Inventory",
     "address": "Location Information",

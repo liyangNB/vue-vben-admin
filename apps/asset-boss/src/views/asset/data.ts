@@ -73,6 +73,11 @@ export function useColumns(
     },
     {
       align: 'center',
+      field: 'model',
+      title: $t('asset.asset.model'),
+    },
+    {
+      align: 'center',
       cellRender: { name: 'CellTag', options: getAssetStateOptions() },
       field: 'state',
       title: $t('asset.asset.state'),
@@ -82,7 +87,7 @@ export function useColumns(
       title: $t('asset.asset.owner'),
     },
     {
-      field: 'total',
+      field: 'quantity',
       title: $t('asset.asset.total'),
     },
     {

@@ -13,6 +13,7 @@
     "state": "设备状态",
     "owner": "所属人",
     "classId": "分类",
+    "model": "型号",
     "projectId": "项目",
     "total": "库存总量",
     "address": "位置信息",
