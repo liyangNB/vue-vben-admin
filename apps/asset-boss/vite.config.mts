@@ -9,8 +9,7 @@ export default defineConfig(async () => {
           '/api': {
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/api/, ''),
-            // mock代理目标地址
-            target: 'http://10.10.0.10:2026/asset-boss',
+            target: 'http://localhost:2026/asset-boss',
             ws: true,
           },
         },
