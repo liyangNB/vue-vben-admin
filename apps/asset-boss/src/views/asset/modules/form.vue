@@ -12,7 +12,6 @@ import { getPopupContainer } from '@vben/utils';
 import { useVbenForm, z } from '#/adapter/form';
 import {
   apiAssetAdd,
-  apiAssetClassPage,
   apiAssetClassTree,
   apiAssetUpdate,
   apiCommonUpFile,
@@ -48,22 +47,7 @@ const schema: VbenFormSchema[] = [
       .max(100, $t('ui.formRules.maxLength', [$t('asset.asset.name'), 100])),
   },
   {
-    component: 'ApiTreeSelect',
-    componentProps: {
-      class: 'w-full',
-      allowClear: true,
-      api: async () => {
-        const response = await apiAssetClassTree();
-        return response;
-      },
-      childrenField: 'children',
-      getPopupContainer,
-      immediate: true,
-      labelField: 'name',
-      showSearch: true,
-      treeDefaultExpandAll: true,
-      valueField: 'id',
-    },
+    component: 'Input',
     fieldName: 'model',
     label: $t('asset.asset.model'),
     rules: z
@@ -99,27 +83,20 @@ const schema: VbenFormSchema[] = [
       .min(1, $t('ui.formRules.required', [$t('asset.asset.state')])),
   },
   {
-    component: 'ApiSelect',
+    component: 'ApiTreeSelect',
     componentProps: {
+      class: 'w-full',
       allowClear: true,
       api: async () => {
-        const response = await apiAssetClassPage({ pageSize: 9999 });
-        // Convert id to string to match classId type
-        return (response.records || []).map((item) => ({
-          ...item,
-          id: String(item.id),
-        }));
+        const response = await apiAssetClassTree();
+        return response;
       },
-      class: 'w-full',
-      filterOption(input: string, option: Recordable<any>) {
-        const name: string = option.name ?? '';
-        if (!name) return false;
-        return name.toLowerCase().includes(input.toLowerCase());
-      },
+      childrenField: 'children',
       getPopupContainer,
       immediate: true,
       labelField: 'name',
       showSearch: true,
+      treeDefaultExpandAll: true,
       valueField: 'id',
     },
     fieldName: 'classId',
